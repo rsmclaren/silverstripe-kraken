@@ -1,5 +1,5 @@
 {
-	"name": "RyanSM/silverstripe-kraken",
+	"name": "rsmclaren/silverstripe-kraken",
 	"description": "Use the kraken API to optimize images",
 	"type": "silverstripe-module",
 	"keywords": ["silverstripe", "kraken", "images", "optimize"],
