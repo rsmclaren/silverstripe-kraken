@@ -1,0 +1,33 @@
+.CMSFileOptimizeImageController .cms-content-fields {
+    padding-top: 12px;    
+}
+
+.CMSFileOptimizeImageController #no-images {
+    display: none;
+}
+
+.CMSFileOptimizeImageController #optimize-info {
+    display: none;
+}
+
+.CMSFileOptimizeImageController #progress-count {    
+    text-align: center;
+    margin-top: 5px;
+}
+
+.CMSFileOptimizeImageController #file-list {    
+    margin: 20px 0 0;
+}
+
+.CMSFileOptimizeImageController #file-list li {
+    padding: 10px;
+    background: #e2e6e9;
+    
+    border-top: 1px solid #d2d5d8;
+    
+    color: #2e3338;
+}
+
+.CMSFileOptimizeImageController #file-list li:nth-child(odd) {
+    background: #c5cdd3;
+}

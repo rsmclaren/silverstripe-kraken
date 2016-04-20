@@ -1,0 +1,28 @@
+---
+Name: krakenconfig
+---
+#Kraken settings
+Kraken:
+    lossy: true
+    wait: true
+
+#extensions
+SiteConfig:
+    extensions:
+        - KrakenSiteConfigExtension
+        
+Upload:
+    extensions:
+        - KrakenUploadExtension
+        
+File:
+    extensions:
+        - KrakenFileExtension
+        
+Image:
+    extensions:
+        - KrakenImageExtension
+        
+AssetAdmin:
+    extensions:
+        - KrakenAssetAdminExtension

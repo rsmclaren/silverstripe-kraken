@@ -1,0 +1,14 @@
+en:
+    Kraken:
+        API_KEY: Kraken API Key
+        API_SECRET: Kraken API Secret
+        API_STATUS: API Status
+        API_OKAY: Your credentials are valid
+        API_PROBLEM: There is a problem with your credentials
+        DISABLE_KRAKEN: Disable Kraken on new uploads
+        OPTIMIZE: Optimize
+        OPTIMIZED: Optimized
+        OPTIMIZED_IMAGES: Optimizing %s image(s)
+        OPTIMIZE_IMAGES: Optimize Images
+        PLEASE_WAIT: Please wait while the images are optimized. Depending on the number of images, this could take quite some time. Please do not leave this page until optimization is complete.
+        NO_IMAGES: There are currently no images to optimize.

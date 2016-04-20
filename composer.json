@@ -1,0 +1,21 @@
+{
+	"name": "RyanSM/silverstripe-kraken",
+	"description": "Use the kraken API to optimize images",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "kraken", "images", "optimize"],
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Ryan McLaren",
+			"email": "ryansm@outlook.com"
+		}
+	],
+	"require": {
+		"silverstripe/framework": "~3.2",
+		"silverstripe/cms": "~3.2",
+		"kraken-io/kraken-php": "~1.4"		
+	},
+	"extra": {
+		"installer-name": "kraken"
+	}
+}
