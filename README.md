@@ -12,7 +12,7 @@
 
 ## Installation
 
-* Extract all files into a folder called "kraken" under your SilverStripe root. Install the Krakek PHP API into a folder called "vendor" under your Silverstripe root, or use composer (recommended):
+* Extract all files into a folder called "kraken" under your SilverStripe root. Install the Kraken PHP API into a folder called "vendor" under your Silverstripe root, or use composer (recommended):
 ```
 composer require rsmclaren/silverstripe-kraken
 ```
