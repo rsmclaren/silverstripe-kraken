@@ -42,7 +42,7 @@ class KrakenService {
             return $this->krakenConnection;
         }
         
-        //establish connection if api keys are set and we arent on localhost
+        //establish connection if api keys are set
         if($this->checkApiKeys()){            
             $kraken = new Kraken($this->apiKey, $this->apiSecret);
             
