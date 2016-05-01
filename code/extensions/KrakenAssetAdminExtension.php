@@ -27,7 +27,7 @@ class KrakenAssetAdminExtension extends Extension {
         );
         
         //add the optimize images button
-        $fields->insertAfter('SyncButton', $optimizeImagesButton);
+        $fields->insertAfter($optimizeImagesButton, 'SyncButton');
         
         //update the grid field display fields
         $columns = $fields->fieldByName('Root.ListView.File')->getConfig()->getComponentByType('GridFieldDataColumns');                

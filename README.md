@@ -7,7 +7,7 @@
 
 ## Requirements
 
-* SilverStripe >= 3.2
+* SilverStripe >= 3.1
 * Kraken.io library for PHP <https://github.com/kraken-io/kraken-php>
 
 ## Installation
