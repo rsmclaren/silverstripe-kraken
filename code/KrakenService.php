@@ -64,8 +64,9 @@ class KrakenService {
         
             $params = array(
                 "file" => $file,
-                "lossy" => $this->getLossy()
-            );
+                "lossy" => $this->getLossy(),
+				"dev" => $this->getDev()
+            );						
 
             if($this->getWait()){
                 $params['wait'] = true;
@@ -122,6 +123,10 @@ class KrakenService {
     public function getLossy(){
         return Config::inst()->get('Kraken', 'lossy');
     }
+	
+	public function getDev(){
+		return Config::inst()->get('Kraken', 'dev');
+	}
     
     /**
      * check if the API key and API secret have been

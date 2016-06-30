@@ -5,6 +5,7 @@ Name: krakenconfig
 Kraken:
     lossy: true
     wait: true
+    dev: false
 
 #extensions
 SiteConfig:

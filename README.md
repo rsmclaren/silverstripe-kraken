@@ -28,6 +28,13 @@ After setting up your API keys, images will be automatically optimized using the
 
 Images that have already been uploaded to the CMS can be optimized using the Optimize Images button located in the Files section of the CMS. Individual images can also be optimized by viewing their details page and clicking the Optimize button.
 
+You can enable the Kraken API Sandbox by using the following in your config.yml. 
+
+    Kraken:
+        dev: true
+
+You can read more about the API Sandbox at [https://kraken.io/docs/sandbox](https://kraken.io/docs/sandbox).
+
 ## Notes
 
 Please note that images optimized using this module are replaced. A backup of the original, unoptimized image will not be saved. Please consider creating a backup of your assets folder before using this module.
