@@ -17,7 +17,7 @@ class KrakenFileExtension extends DataExtension {
      * @return string
      */
     public function getKrakedNice(){
-        if($this->owner->Kraked === 1){
+        if(intval($this->owner->Kraked) === 1){
             return 'Yes';
         }else {
             return 'No';
