@@ -6,6 +6,7 @@ Kraken:
     lossy: true
     wait: true
     dev: false
+    ignore_kraked_status: false
 
 #extensions
 SiteConfig:

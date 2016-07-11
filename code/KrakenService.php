@@ -124,8 +124,21 @@ class KrakenService {
         return Config::inst()->get('Kraken', 'lossy');
     }
 	
+	/**
+	 * return the Kraken dev config option
+	 * @return bool
+	 */
 	public function getDev(){
 		return Config::inst()->get('Kraken', 'dev');
+	}
+	
+	/**
+	 * if this is set to true then reoptimize all images, regardless
+	 * of their Kraked status
+	 * @return bool
+	 */
+	public function getIgnoreKrakedStatus(){
+		return Config::inst()->get('Kraken', 'ignore_kraked_status');
 	}
     
     /**

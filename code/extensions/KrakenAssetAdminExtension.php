@@ -45,7 +45,7 @@ class KrakenAssetAdminExtension extends Extension {
         $krakenService = new KrakenService();
         
         if($this->owner->request->getVar('ID') >= 1){
-            $image = Image::get()->filter('Kraked', 0)->byID(intval($this->owner->request->getVar('ID')));
+			$image = Image::get()->byID(intval($this->owner->request->getVar('ID')));			            			
         }
         
         if($image){            
@@ -64,7 +64,22 @@ class KrakenAssetAdminExtension extends Extension {
 
                 $image->Kraked = true;
                 $image->write();
-                $image->deleteFormattedImages();
+				
+				//optimize the formatted images
+				$formattedImages = $image->getTheFormattedImages();
+				if($formattedImages){					
+					foreach($formattedImages as $formattedImage){
+						$data = $krakenService->optimizeImage($formattedImage['FileName']);
+
+						if($data['success']){							
+							//attempt to download the kraked file
+							$krakedFile = $krakenService->getOptimizedImage($data['kraked_url']);
+							
+							//update the file
+							file_put_contents( $formattedImage['FileName'], $krakedFile );
+						}
+					}
+				}                
                 
                 if(Director::is_ajax()){
                     return json_encode(array(
@@ -89,14 +104,17 @@ class KrakenAssetAdminExtension extends Extension {
      * @return json
      */
     public function imagesToOptimize(){
-        //only get images that haven't been optimized
-        $images = Image::get()->filter('Kraked', 0);
-        
+		$images = Image::get();      
+		
+		if(Config::inst()->get('Kraken', 'ignore_kraked_status') != true){
+			$images = $images->filter('Kraked', 0);
+		}
+		        
         //if we're in a folder, only optimize the images in that folder
         if($this->owner->request->getVar('ParentID') >= 1){
             $images = $images->filter('ParentID', intval($this->owner->request->getVar('ParentID')));
         }
-        
+				        
         if($images->count() >= 1){
             return json_encode($images->column('ID'));
         }else {
