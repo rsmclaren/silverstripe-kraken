@@ -15,11 +15,7 @@ SiteConfig:
         
 Upload:
     extensions:
-        - KrakenUploadExtension
-        
-File:
-    extensions:
-        - KrakenFileExtension
+        - KrakenUploadExtension       
         
 Image:
     extensions:

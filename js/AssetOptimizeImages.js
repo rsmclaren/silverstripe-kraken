@@ -1,6 +1,6 @@
 (function($) {            
     
-    //optimized multiple images
+    //optimize multiple images
     $('.CMSFileOptimizeImageController #optimize-progress-bar').entwine({
         onmatch: function(e){
             var parentID = getParameterByName('ID');
@@ -39,10 +39,10 @@
              * @param {type} result
              * @returns {undefined}
              */
-            function optimizeImage(id, idList){
+            function optimizeImage(path, pathList){
                 $.ajax({
                     url: $('base').attr('href') + "admin/assets/optimizeImage",
-                    data: {ID: id},
+                    data: {image: path},
                     success: function(result){
                         result = JSON.parse(result);
 
@@ -55,8 +55,8 @@
 
                         $('#file-list').append('<li>Optimized '+result.Name+'. Optimized Size: '+result.OptimizedSize+'. Original Size: '+result.UnoptimizedSize+'</li>');
                                                 
-                        if(count < idList.length){
-                            optimizeImage(idList[count], idList);
+                        if(count < pathList.length){
+                            optimizeImage(pathList[count], pathList);
                         }
                     }
                 });
