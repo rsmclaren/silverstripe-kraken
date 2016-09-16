@@ -10,12 +10,6 @@ class KrakenAssetAdminExtension extends Extension {
 		'optimizeImage',
 		'imagesToOptimize'
 	);
-	private static $supported_image = array(
-		'gif',
-		'jpg',
-		'jpeg',
-		'png'
-	);
 
 	public function updateEditForm($form) {
 		$folder = $this->owner->currentPage();
@@ -47,29 +41,44 @@ class KrakenAssetAdminExtension extends Extension {
 	 */
 	public function optimizeImage() {
 		$krakenService = new KrakenService();
+		$response = array();
 
-		$image = $this->owner->request->getVar('image');
+		if ($this->owner->request->getVar('ID') >= 1) {
+			$image = Image::get()->byID(intval($this->owner->request->getVar('ID')));
+		}
 
 		//check if a file path was supplied
 		if ($image) {
-			$data = $krakenService->optimizeImage($image);
-			
-			//check if optimization was success
-			if ($data['success'] && $data['saved_bytes'] >= 1) {
-				
-				//attempt to download the kraked file
-				$krakedFile = $krakenService->getOptimizedImage($data['kraked_url']);
 
-				//update the file
-				file_put_contents($image, $krakedFile);
+			//optimize this image
+			if (!$image->Kraked) {
+				$data = $krakenService->optimizeImage($image->getFullPath());
+
+				//check if optimization was success
+				if ($data['success'] && $data['saved_bytes'] >= 0) {
+
+					//attempt to download the kraked file
+					$krakedFile = $krakenService->getOptimizedImage($data['kraked_url']);
+
+					//update the file
+					if ($krakedFile) {
+						file_put_contents($image, $krakedFile);
+						$image->Kraked = true;						
+						$image->write();
+
+						$response['Name'] = $data['file_name'];
+						$response['UnoptimizedSize'] = File::format_size($data['original_size']);
+						$response['OptimizedSize'] = File::format_size($data['kraked_size']);
+					}
+				}
 			}
 
+			$resizedImageCount = $this->optimizeFormattedImages($image);
+
+			$response['FormattedImagesMessage'] = "Optimzed {$resizedImageCount} formatted images";
+
 			if (Director::is_ajax()) {
-				return json_encode(array(
-					'Name' => $data['file_name'],
-					'UnoptimizedSize' => File::format_size($data['original_size']),
-					'OptimizedSize' => File::format_size($data['kraked_size'])
-				));
+				return json_encode($response);
 			} else {
 				$message = _t('Kraken.OPTIMIZED', '_Optimized');
 
@@ -79,34 +88,52 @@ class KrakenAssetAdminExtension extends Extension {
 			}
 		}
 	}
+	
+	/**
+	 * optimize formatted images
+	 * @param Image $image
+	 */
+	public function optimizeFormattedImages(Image $image) {
+		$krakenService = new KrakenService();
+		
+		$resizedImages = $image->getResizedImages();
+		$resizedImageCount = 0;
+		
+		if ($resizedImages) {
+			foreach ($resizedImages as $resizedImage) {				
+				$data = $krakenService->optimizeImage($resizedImage['FileName']);
+
+				//check if optimization was success
+				if ($data['success'] && $data['saved_bytes'] >= 0) {
+					//attempt to download the kraked file
+					$krakedFile = $krakenService->getOptimizedImage($data['kraked_url']);
+
+					//update the file
+					if ($krakedFile) {
+						file_put_contents($resizedImage['FileName'], $krakedFile);
+						$resizedImageCount++;
+					}
+				}				
+			}
+		}
+        
+        return $resizedImageCount;
+	}
 
 	/**
-	 * Get the Filepaths of every image in the current folder
+	 * Get every non kraked image in the current folder
+	 * @TODO this should get subfolders as well
 	 * @return json
 	 */
 	public function imagesToOptimize() {
+		$images = Image::get()->filter('Kraked', 0);
+
 		if ($this->owner->request->getVar('ParentID') >= 1) {
-			$folder = Folder::get()->byID(intval($this->owner->request->getVar('ParentID')))->Filename;
-		} else {
-			$folder = ASSETS_PATH . '/';
+			$images = $images->filter('ParentID', intval($this->owner->request->getVar('ParentID')));
 		}
 
-		$cacheDir = Director::getAbsFile($folder);
-
-		if (is_dir($cacheDir)) {
-			$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($cacheDir));
-			$paths = array();
-
-			foreach ($files as $path => $file) {
-				$ext = strtolower(pathinfo($file->getFilename(), PATHINFO_EXTENSION));
-				if (in_array($ext, self::$supported_image)) {
-					$paths[] = $path;
-				}
-			}
-		}
-
-		if (!empty($paths)) {
-			return json_encode($paths);
+		if ($images->count() >= 1) {
+			return json_encode($images->column('ID'));
 		} else {
 			return json_encode(false);
 		}

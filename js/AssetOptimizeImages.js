@@ -39,10 +39,10 @@
              * @param {type} result
              * @returns {undefined}
              */
-            function optimizeImage(path, pathList){
+            function optimizeImage(id, idList){
                 $.ajax({
                     url: $('base').attr('href') + "admin/assets/optimizeImage",
-                    data: {image: path},
+                    data: {ID: id},
                     success: function(result){
                         result = JSON.parse(result);
 
@@ -52,11 +52,13 @@
                         progressBar.progressbar( "value", count );
 
                         progressCount.find('#count').html(count);
+                        
+                        var message = 
 
                         $('#file-list').append('<li>Optimized '+result.Name+'. Optimized Size: '+result.OptimizedSize+'. Original Size: '+result.UnoptimizedSize+'</li>');
                                                 
-                        if(count < pathList.length){
-                            optimizeImage(pathList[count], pathList);
+                        if(count < idList.length){
+                            optimizeImage(idList[count], idList);
                         }
                     }
                 });

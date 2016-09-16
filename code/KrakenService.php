@@ -134,7 +134,8 @@ class KrakenService {
 	
 	/**
 	 * if this is set to true then reoptimize all images, regardless
-	 * of their Kraked status
+	 * of their Kraked status. Useful if you need to make sure
+     * all images are optimizes
 	 * @return bool
 	 */
 	public function getIgnoreKrakedStatus(){

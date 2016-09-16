@@ -5,7 +5,8 @@ en:
         API_STATUS: API Status
         API_OKAY: Your credentials are valid
         API_PROBLEM: There is a problem with your credentials
-        DISABLE_KRAKEN: Disable Kraken on new uploads
+        DISABLE_KRAKEN: Disable Kraken
+        DISABLE_KRAKEN_NEW_UPLOADS: Disable Kraken on new uploads
         OPTIMIZE: Optimize
         OPTIMIZED: Optimized
         OPTIMIZED_IMAGES: Optimizing %s image(s)

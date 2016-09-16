@@ -15,7 +15,7 @@ class KrakenUploadExtension extends Extension {
     public function onAfterLoad($file, $tmpFile){
         $siteConfig = SiteConfig::current_site_config();        
         
-        if(!$siteConfig->DisableKraken && $file->appCategory() === 'image'){            
+        if(!$siteConfig->DisableKrakenNewUploads && !$siteConfig->DisableKraken && $file->appCategory() === 'image'){            
             $krakenService = new KrakenService();
 
             $data = $krakenService->optimizeImage($file->getFullPath());

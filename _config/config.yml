@@ -17,6 +17,10 @@ Upload:
     extensions:
         - KrakenUploadExtension       
         
+File:
+    extensions:
+        - KrakenFileExtension
+        
 Image:
     extensions:
         - KrakenImageExtension
@@ -24,3 +28,6 @@ Image:
 AssetAdmin:
     extensions:
         - KrakenAssetAdminExtension
+        
+Image:
+    backend: KrakenGDBackend
