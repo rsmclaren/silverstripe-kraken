@@ -24,7 +24,7 @@ composer require rsmclaren/silverstripe-kraken
 
 ## Usage
 
-After setting up your API keys, images will be automatically optimized using the Kraken API when uploaded through any UploadField in the CMS. You will likely notice that Uploading Images is slower after activating the module. This feature can be disable from the Settings > Kraken tab.
+After setting up your API keys, images will be automatically optimized using the Kraken API when uploaded through any UploadField in the CMS. You will likely notice that Uploading Images is slower after activating the module.
 
 Images that have already been uploaded to the CMS can be optimized using the Optimize Images button located in the Files section of the CMS. Individual images can also be optimized by viewing their details page and clicking the Optimize button.
 
