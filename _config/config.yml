@@ -24,10 +24,8 @@ File:
 Image:
     extensions:
         - KrakenImageExtension
+    backend: KrakenGDBackend
         
 AssetAdmin:
     extensions:
         - KrakenAssetAdminExtension
-        
-Image:
-    backend: KrakenGDBackend

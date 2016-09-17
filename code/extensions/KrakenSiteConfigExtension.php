@@ -10,8 +10,7 @@ class KrakenSiteConfigExtension extends DataExtension {
     private static $db = array(
         'KrakenAPIKey'=>'Varchar(255)',
         'KrakenAPISecret'=>'Varchar(255)',
-        'DisableKraken'=>'Boolean',
-        'DisableKrakenNewUploads'=>'Boolean'
+        'DisableKraken'=>'Boolean'        
     );
     
     public function updateCMSFields(FieldList $fields) {
@@ -23,8 +22,7 @@ class KrakenSiteConfigExtension extends DataExtension {
                     LiteralField::create('status', $this->getAPIStatusString())
                     )->setTitle(_t('Kraken.API_STATUS', '_API Status')
             ),
-            CheckboxField::create('DisableKraken', _t('Kraken.DISABLE_KRAKEN', '_Disable Kraken')),
-            CheckboxField::create('DisableKrakenNewUploads', _t('Kraken.DISABLE_KRAKEN_NEW_UPLOADS', '_Disable Kraken on new uploads'))
+            CheckboxField::create('DisableKraken', _t('Kraken.DISABLE_KRAKEN', '_Disable Kraken'))            
         ));
     }
     
