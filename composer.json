@@ -11,8 +11,8 @@
 		}
 	],
 	"require": {
-		"silverstripe/framework": "~3.1.9",
-		"silverstripe/cms": "~3.1.9",
+		"silverstripe/framework": "~3.1",
+		"silverstripe/cms": "~3.1",
 		"kraken-io/kraken-php": "~1.4"		
 	},
 	"extra": {
