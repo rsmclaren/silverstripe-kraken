@@ -62,7 +62,7 @@ class KrakenAssetAdminExtension extends Extension {
 
 					//update the file
 					if ($krakedFile) {
-						file_put_contents($image, $krakedFile);
+						file_put_contents($image->getFullPath(), $krakedFile);
 						$image->Kraked = true;						
 						$image->write();
 
